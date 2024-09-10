@@ -3,11 +3,12 @@ using System;
 using Scripts.Balls;
 using Scripts.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.Players
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Player : MonoBehaviour, IBallBurster
+    public class Player : MonoBehaviour, IBallBurster, IInitializable
     {
         public event Action<Ball> BurstedBall;
 
@@ -17,32 +18,26 @@ namespace Scripts.Players
         private CharacterController _characterController;
         private bool _isEnabled;
 
+        [Inject]
+        private void Construct(GameInput gameInput)
+            => _gameInput = gameInput;
+
         private void Update()
         {
             if (_isEnabled && _gameInput.CanMovement)
                 _characterController.Move(_gameInput.GetDirectionMovememt() * _speed * Time.deltaTime);
         }
 
-        public void Initialize(GameInput gameInput)
-        {
-            _gameInput = gameInput;
-
-            _characterController = GetComponent<CharacterController>();
-        }
+        public void Initialize()
+            => _characterController = GetComponent<CharacterController>();
 
         public void ReactBallBurster(Ball ball)
-        {
-            BurstedBall?.Invoke(ball);
-        }
+            => BurstedBall?.Invoke(ball);
 
         public void Enable()
-        {
-            _isEnabled = true;
-        }
+            => _isEnabled = true;
 
         public void Disable()
-        {
-            _isEnabled = false;
-        }
+            => _isEnabled = false;
     }
 }

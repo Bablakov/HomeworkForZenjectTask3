@@ -1,8 +1,8 @@
 ﻿using Scripts.Balls;
 using Scripts.Configs;
 using Scripts.Enums;
+using System;
 using UnityEngine;
-using Zenject;
 
 namespace Scripts.Factory
 {
@@ -10,23 +10,18 @@ namespace Scripts.Factory
     {
         private BallConfiguration _ballConfiguration;
 
-        [Inject]
-        private void Construct(BallConfiguration ballConfiguration)
+        public BallFactory(BallConfiguration ballConfiguration)
             => _ballConfiguration = ballConfiguration;
 
         public Ball Get(BallColor ballColor)
-        {
-            /*switch(ballColor)
-            {
-                case BallColor.Red:
-                    return GameObject.Instantiate(_ballConfiguration.TryGetBallConfig(ballColor))
-            }*/
-            return null;
-        }
+            => GameObject.Instantiate(GetBall(ballColor));
 
-        private Ball GetBallColor(BallColor ballColor) 
+        private Ball GetBall(BallColor ballColor) 
         {
-            return null;
+            if (_ballConfiguration.TryGetBallConfig(ballColor, out BallConfig ballConfig))
+                return ballConfig.Ball;
+
+            throw new ArgumentException(nameof(ballColor));
         }
     }
 }

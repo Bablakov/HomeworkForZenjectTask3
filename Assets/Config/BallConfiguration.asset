@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839aa81c188603640879400c670e3e8e, type: 3}
   m_Name: BallConfiguration
   m_EditorClassIdentifier: 
-  _ballConfigs: []
+  _ballConfigs:
+  - {fileID: 11400000, guid: e2ecd25c5688f5d46828d48615c1695d, type: 2}
+  - {fileID: 11400000, guid: 23499342b42a60c4a8a2be5a6ac47e89, type: 2}
+  - {fileID: 11400000, guid: 05ca09f750d00d244b179efbc846c098, type: 2}

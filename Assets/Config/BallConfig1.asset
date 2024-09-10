@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6765a0b32a721664dbfc6fc68e50dcdc, type: 3}
   m_Name: BallConfig1
   m_EditorClassIdentifier: 
-  <Ball>k__BackingField: {fileID: 0}
-  <BallColor>k__BackingField: 1
+  <Ball>k__BackingField: {fileID: 6887903989823321641, guid: cf3f60b7f2940624184c35e5712631f7,
+    type: 3}

@@ -11,14 +11,16 @@ namespace Scripts.Configs
 
         public bool TryGetBallConfig(BallColor ballColor, out BallConfig ballConfig)
         {
-            ballConfig = _ballConfigs.Where(x => x.BallColor == ballColor).FirstOrDefault();
+            ballConfig = _ballConfigs
+                .Where(ballConfig => ballConfig.BallColor == ballColor)
+                .FirstOrDefault();
 
             return ballConfig != null;
         }
 
         private void OnValidate()
         {
-            if (_ballConfigs.GroupBy(x => x.BallColor).Count() == _ballConfigs.Length)
+            if (_ballConfigs.GroupBy(ballConfig => ballConfig.BallColor).Count() != _ballConfigs.Length)
                 Debug.LogError("Ball color is not unique");
         }
     }

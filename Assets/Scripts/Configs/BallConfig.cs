@@ -8,6 +8,6 @@ namespace Scripts.Configs
     public class BallConfig : ScriptableObject
     {
         [field: SerializeField] public Ball Ball { get; private set; }
-        [field: SerializeField] public BallColor BallColor { get; private set; }
+        public BallColor BallColor => Ball.BallColor;
     }
 }
