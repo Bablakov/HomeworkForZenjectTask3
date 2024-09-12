@@ -1,7 +1,7 @@
 using Scripts.SceneLoaderImport.Loader;
 using Zenject;
 
-namespace Scripts.Installer
+namespace Scripts.Zenject
 {
     public class GlobalInstaller : MonoInstaller
     {

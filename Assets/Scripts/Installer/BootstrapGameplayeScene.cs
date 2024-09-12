@@ -3,6 +3,7 @@ using Scripts.Controllers;
 using Scripts.Factory;
 using Scripts.Interfaces;
 using Scripts.Players;
+using Scripts.SceneLoaderImport.Loader;
 using Scripts.Spawner;
 using Scripts.VictoryCondition;
 using System;
@@ -21,15 +22,18 @@ namespace Scripts.Installer
         private PlayerFactory _playerFactory;
         private VictoryConditionFactory _victoryConditionFactory;
         private Player _player;
+        private LevelLoadingData _levelLoadingData;
 
         [Inject]
-        private void Construct(BallSpawner ballSPawner, Level level, VictoryConditionFactory victoryConditionFactory, PlayerFactory playerFactory, Player ballBurster)
+        private void Construct(BallSpawner ballSPawner, Level level, VictoryConditionFactory victoryConditionFactory, 
+            PlayerFactory playerFactory, Player ballBurster, LevelLoadingData levelLoadingData)
         {
             _level = level;
             _ballSpawner = ballSPawner;
             _playerFactory = playerFactory;
             _victoryConditionFactory = victoryConditionFactory;
             _player = ballBurster;
+            _levelLoadingData = levelLoadingData;
         }
 
         private void Awake()
@@ -39,7 +43,7 @@ namespace Scripts.Installer
 
             //_playerFactory.Create(_spawnPointPlayer.position, _spawnPointPlayer.rotation);  
             if (_ballSpawner.TrySpawn(out IEnumerable<Ball> balls))
-                _level.SetVictoryCondition(_victoryConditionFactory.Create(TypeCondition.AllColor, new BallsController(balls), _player));
+                _level.SetVictoryCondition(_victoryConditionFactory.Create(_levelLoadingData.Level, new BallsController(balls), _player));
 
             else
                 throw new ArgumentException("Не могу запустить проект");

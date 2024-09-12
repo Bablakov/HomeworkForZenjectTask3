@@ -1,21 +1,37 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.SceneLoaderImport
 {
     public class VictoryConditionSelectionPanel : MonoBehaviour
     {
-        /*[SerializeField] private LevelSelectionButton[] _levelSelectionButtons;
+        public event Action AllColorVictorySelected;
+        public event Action OneColorVictorySelected;
 
-        private void OnEnable()
+        [SerializeField] private Button _allColorVictorySelecteButton;
+        [SerializeField] private Button _oneColorVictorySelecteButton;
+
+        private void OnEnable() => Subscribe();
+
+        private void OnDisable() => Unsubscribe();
+
+        private void Subscribe()
         {
-            foreach(var levelSelectionButton in _levelSelectionButtons)
-                levelSelectionButton.Click += OnLevelSelected;
+            _allColorVictorySelecteButton.onClick.AddListener(OnAllColorVictorySelected);
+            _oneColorVictorySelecteButton.onClick.AddListener(OnOneColorVictorySelecte);
         }
 
-        private void OnDisable()
+        private void Unsubscribe()
         {
-            foreach(var levelSelectionButton in _levelSelectionButtons)
-                levelSelectionButton.Click -= OnLevelSelected;
-        }*/
+            _allColorVictorySelecteButton.onClick.RemoveListener(OnAllColorVictorySelected);
+            _oneColorVictorySelecteButton.onClick.RemoveListener(OnOneColorVictorySelecte);
+        }
+
+        private void OnAllColorVictorySelected()
+            => AllColorVictorySelected?.Invoke();
+
+        private void OnOneColorVictorySelecte()
+            => OneColorVictorySelected?.Invoke();
     }
 }

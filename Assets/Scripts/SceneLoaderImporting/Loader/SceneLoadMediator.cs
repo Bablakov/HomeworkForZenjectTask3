@@ -1,5 +1,3 @@
-using Scripts.SceneLoaderImport.Loader;
-
 namespace Scripts.SceneLoaderImport.Loader
 {
     public class SceneLoadMediator

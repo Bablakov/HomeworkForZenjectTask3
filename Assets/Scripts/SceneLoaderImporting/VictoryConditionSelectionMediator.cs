@@ -1,5 +1,7 @@
 ﻿using Scripts.SceneLoaderImport.Loader;
+using Scripts.VictoryCondition;
 using System;
+using UnityEngine;
 
 namespace Scripts.SceneLoaderImport
 {
@@ -14,25 +16,26 @@ namespace Scripts.SceneLoaderImport
             _victoryConditionSelectionPanel = victoryConditionSelectionPanel;
             _sceneLoadMediator = sceneLoadMediator;
             Subscribe();
+            Debug.Log("CreateVictoryConditionSelectionMediator");
         }
 
-        public void Dispose() => Subscribe();
+        public void Dispose() => Unsubscribe();
 
         private void Subscribe()
         {
-            /*_victoryConditionSelectionPanel.AllColorVictorySelected += OnAllColorVictorySelected;
-            _victoryConditionSelectionPanel.OneColorVictorySelected += OnOneColorVictorySelected;*/
+            _victoryConditionSelectionPanel.AllColorVictorySelected += OnAllColorVictorySelected;
+            _victoryConditionSelectionPanel.OneColorVictorySelected += OnOneColorVictorySelected;
         }
 
         private void Unsubscribe()
         {
-            /*_victoryConditionSelectionPanel.AllColorVictorySelected -= OnAllColorVictorySelected;
-            _victoryConditionSelectionPanel.OneColorVictorySelected -= OnOneColorVictorySelected;*/
+            _victoryConditionSelectionPanel.AllColorVictorySelected -= OnAllColorVictorySelected;
+            _victoryConditionSelectionPanel.OneColorVictorySelected -= OnOneColorVictorySelected;
         }
 
-        private void OnOneColorVictorySelected() 
-            => throw new System.NotImplementedException();
+        private void OnOneColorVictorySelected()
+            => _sceneLoadMediator.GoToGameplayLevel(new LevelLoadingData(TypeCondition.OneColor));
         private void OnAllColorVictorySelected() 
-            => throw new System.NotImplementedException();
+            => _sceneLoadMediator.GoToGameplayLevel(new LevelLoadingData(TypeCondition.AllColor));
     }
 }

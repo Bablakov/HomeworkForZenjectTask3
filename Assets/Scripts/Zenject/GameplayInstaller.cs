@@ -2,7 +2,6 @@
 using Scripts.Controllers;
 using Scripts.Factory;
 using Scripts.Input;
-using Scripts.Interfaces;
 using Scripts.Players;
 using Scripts.Spawner;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using Zenject;
 
 namespace Scripts.Zenject
 {
-    public class GameInstaller : MonoInstaller
+    public class GameplayInstaller : MonoInstaller
     {
         [SerializeField] private BallConfiguration _ballConfiguration;
         [SerializeField] private List<SpawnPoint> _spawnPoints;
