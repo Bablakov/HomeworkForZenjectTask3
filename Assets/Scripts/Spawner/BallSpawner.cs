@@ -39,7 +39,7 @@ namespace Scripts.Spawner
             foreach (var spawnPoint in _spawnPoints)
                 if (spawnPoint.IsEmpty)
                 {
-                    Ball ball = _ballFactory.Get(GetRandomBallColor());
+                    Ball ball = _ballFactory.Create(GetRandomBallColor());
                     spawnPoint.Set(ball);
                     balls.Add(ball);
                 }
@@ -50,7 +50,7 @@ namespace Scripts.Spawner
         private BallColor GetRandomBallColor()
         {
             int numberEnemyType = Enum.GetValues(typeof(BallColor)).Length;
-            int randomNumber = Random.Range(0, numberEnemyType);
+            int randomNumber = Random.Range(1, numberEnemyType);
 
             return (BallColor)randomNumber;
         }

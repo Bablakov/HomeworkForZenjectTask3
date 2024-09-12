@@ -1,5 +1,6 @@
 ﻿using Scripts.Interfaces;
 using System;
+using UnityEngine;
 
 namespace Scripts.Controllers
 {
@@ -8,11 +9,14 @@ namespace Scripts.Controllers
         public event Action DisplayedWinningPanel;
         public event Action DisplayedDefeatPanel;
 
-        private IVictoryCondition _victoryDeterminant;
+        private IVictoryCondition _victoryCondition;
 
-        public Level(IVictoryCondition victoryCondition)
+        public void SetVictoryCondition(IVictoryCondition victoryCondition)
         {
-            _victoryDeterminant = victoryCondition;
+            if (_victoryCondition != null)
+                Unsubscribe();
+
+            _victoryCondition = victoryCondition;
             Subscribe();
         }
 
@@ -20,13 +24,15 @@ namespace Scripts.Controllers
             => Unsubscribe();
 
         private void Subscribe()
-            => _victoryDeterminant.Finished += OnFinished;
+            => _victoryCondition.Finished += OnFinished;
 
         private void Unsubscribe()
-            => _victoryDeterminant.Finished -= OnFinished;
+            => _victoryCondition.Finished -= OnFinished;
 
         private void OnFinished(bool isWin)
         {
+            Debug.Log("Finished");
+
             if (isWin)
                 DisplayedWinningPanel?.Invoke();
 

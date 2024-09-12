@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Scripts.Balls;
+﻿using Scripts.Balls;
 using Scripts.Interfaces;
 using Scripts.Enums;
 
 namespace Scripts.VictoryCondition
 {
-    public class OneColorVictory : IVictoryCondition
+    public class OneColorVictory : VictoryCondition
     {
-        public event Action<bool> Finished;
-
-        private List<Ball> _balls;
-        private IBallBurster _ballBurster;
         private BallColor _ballTypeBurst = BallColor.None;
         private bool _isCompleted;
 
-        public OneColorVictory(IEnumerable<Ball> balls, IBallBurster ballBurster)
-        {
-            _balls = new List<Ball>(balls);
-            _ballBurster = ballBurster;
-            _ballBurster.BurstedBall += OnBurstedBall;
-        }
+        public OneColorVictory(BallsController ballsController, IBallBurster ballBurster)
+            : base(ballsController, ballBurster)
+        { }
 
-        private void OnBurstedBall(Ball ball)
+        protected override void OnBurstedBall(Ball ball)
         {
             if (_isCompleted == false)
             {
@@ -34,18 +24,18 @@ namespace Scripts.VictoryCondition
                 else if (_ballTypeBurst != ball.BallColor)
                 {
                     _isCompleted = true;
-                    Finished?.Invoke(false);
+                    FinishedInvoke(false);
                 }
 
-                if (_balls.Contains(ball))
+                if (BallsController.Contains(ball))
                 {
-                    _balls.Remove(ball);
+                    BallsController.Remove(ball);
                 }
 
-                if (_balls.Where(ball => ball.BallColor == _ballTypeBurst).Count() == 0)
+                if (BallsController.CountByColor(_ballTypeBurst) == 0)
                 {
                     _isCompleted = true;
-                    Finished?.Invoke(true);
+                    FinishedInvoke(true);
                 }
             }
         }

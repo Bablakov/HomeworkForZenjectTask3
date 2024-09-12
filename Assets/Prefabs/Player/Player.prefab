@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8265684100484976683}
   - component: {fileID: -4149778137352086177}
   - component: {fileID: 5339210578125687234}
-  - component: {fileID: 376058610933524740}
+  - component: {fileID: 2712274518464575029}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf0072b102b11f4b836a022f687cac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
 --- !u!54 &5339210578125687234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74,8 +75,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &376058610933524740
-CapsuleCollider:
+--- !u!143 &2712274518464575029
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,10 +93,13 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
+  serializedVersion: 3
   m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &7665326353846209138
 PrefabInstance:

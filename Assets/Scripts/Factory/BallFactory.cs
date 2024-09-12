@@ -13,7 +13,7 @@ namespace Scripts.Factory
         public BallFactory(BallConfiguration ballConfiguration)
             => _ballConfiguration = ballConfiguration;
 
-        public Ball Get(BallColor ballColor)
+        public Ball Create(BallColor ballColor)
             => GameObject.Instantiate(GetBall(ballColor));
 
         private Ball GetBall(BallColor ballColor) 
@@ -21,7 +21,8 @@ namespace Scripts.Factory
             if (_ballConfiguration.TryGetBallConfig(ballColor, out BallConfig ballConfig))
                 return ballConfig.Ball;
 
-            throw new ArgumentException(nameof(ballColor));
+            else 
+                throw new ArgumentException(nameof(ballColor));
         }
     }
 }

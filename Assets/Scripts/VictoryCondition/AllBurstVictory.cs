@@ -1,31 +1,21 @@
-using System;
-using System.Collections.Generic;
 using Scripts.Balls;
 using Scripts.Interfaces;
 
 namespace Scripts.VictoryCondition
 {
-    public class AllBurstVictory : IVictoryCondition
+    public class AllBurstVictory : VictoryCondition
     {
-        public event Action<bool> Finished;
+        public AllBurstVictory(BallsController ballsController, IBallBurster ballBurster)
+            : base(ballsController, ballBurster)
+        { }
 
-        private List<Ball> _balls;
-        private IBallBurster _ballBurster;
-
-        public AllBurstVictory(IEnumerable<Ball> balls, IBallBurster ballBurster)
+        protected override void OnBurstedBall(Ball ball)
         {
-            _balls = new List<Ball>(balls);
-            _ballBurster = ballBurster;
-            _ballBurster.BurstedBall += OnBurstedBall;
-        }
+            if (BallsController.Contains(ball))
+                BallsController.Remove(ball);
 
-        private void OnBurstedBall(Ball ball)
-        {
-            if (_balls.Contains(ball))
-                _balls.Remove(ball);
-
-            if (_balls.Count == 0)
-                Finished?.Invoke(true);
+            if (BallsController.Count == 0)
+                FinishedInvoke(true);
         }
     }
 }
