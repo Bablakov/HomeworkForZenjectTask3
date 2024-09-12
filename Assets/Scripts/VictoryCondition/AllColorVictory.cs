@@ -3,9 +3,9 @@ using Scripts.Interfaces;
 
 namespace Scripts.VictoryCondition
 {
-    public class AllBurstVictory : VictoryCondition
+    public class AllColorVictory : VictoryCondition
     {
-        public AllBurstVictory(BallsController ballsController, IBallBurster ballBurster)
+        public AllColorVictory(BallsController ballsController, IBallBurster ballBurster)
             : base(ballsController, ballBurster)
         { }
 

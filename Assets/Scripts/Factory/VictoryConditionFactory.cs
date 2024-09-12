@@ -18,7 +18,7 @@ namespace Scripts.Factory
             switch(type)
             {
                 case TypeCondition.AllColor:
-                    return new AllBurstVictory(ballsController, ballBurster);
+                    return new AllColorVictory(ballsController, ballBurster);
 
                 case TypeCondition.OneColor:
                     return new OneColorVictory(ballsController, ballBurster);
