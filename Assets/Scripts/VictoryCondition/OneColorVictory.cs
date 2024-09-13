@@ -1,6 +1,7 @@
 ﻿using Scripts.Balls;
 using Scripts.Interfaces;
 using Scripts.Enums;
+using UnityEngine;
 
 namespace Scripts.VictoryCondition
 {
@@ -14,6 +15,7 @@ namespace Scripts.VictoryCondition
 
         protected override void OnBurstedBall(Ball ball)
         {
+            Debug.Log($"{_ballTypeBurst}, {ball.BallColor}");
             if (BallsController.Contains(ball) == false)
                 return;
 

@@ -4,6 +4,7 @@ using Scripts.VictoryCondition;
 using Zenject;
 using System;
 using Scripts.Enums;
+using UnityEngine;
 
 namespace Scripts.Factory
 {
@@ -16,6 +17,7 @@ namespace Scripts.Factory
 
         public VictoryCondition.VictoryCondition Create(TypeCondition type, BallsController ballsController, IBallBurster ballBurster)
         {
+            Debug.Log("-----------------------------------");
             switch(type)
             {
                 case TypeCondition.AllColor:
