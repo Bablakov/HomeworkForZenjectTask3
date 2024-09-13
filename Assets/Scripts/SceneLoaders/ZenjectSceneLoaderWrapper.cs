@@ -2,7 +2,7 @@ using System;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Scripts.SceneLoaderImport.Loader
+namespace Scripts.SceneLoaders
 {
     public class ZenjectSceneLoaderWrapper
     {

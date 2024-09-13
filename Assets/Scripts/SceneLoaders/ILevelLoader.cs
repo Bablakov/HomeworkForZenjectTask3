@@ -1,4 +1,4 @@
-namespace Scripts.SceneLoaderImport.Loader
+namespace Scripts.SceneLoaders
 {
     public interface ILevelLoader 
     {

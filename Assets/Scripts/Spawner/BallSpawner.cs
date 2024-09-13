@@ -12,16 +12,18 @@ namespace Scripts.Spawner
     {
         private BallFactory _ballFactory;
         private List<SpawnPoint> _spawnPoints;
+        private BallsController _ballController;
 
         private BallSpawner(BallFactory ballFactory, IEnumerable<SpawnPoint> spawnPoints)
         {
             _ballFactory = ballFactory;
             _spawnPoints = new List<SpawnPoint>(spawnPoints);
+            _ballController = new BallsController(new List<Ball>());
         }
 
         private bool CanSpawn => _spawnPoints.Any(spawnPoint => spawnPoint.IsEmpty);
 
-        public bool TrySpawn(out IEnumerable<Ball> balls)
+        public bool TrySpawn(out BallsController balls)
         {
             if (CanSpawn) 
             {
@@ -33,18 +35,17 @@ namespace Scripts.Spawner
             return false;
         }
 
-        private IEnumerable<Ball> SpawnBalls()
+        private BallsController SpawnBalls()
         {
-            List<Ball> balls = new List<Ball>();
             foreach (var spawnPoint in _spawnPoints)
                 if (spawnPoint.IsEmpty)
                 {
                     Ball ball = _ballFactory.Create(GetRandomBallColor());
                     spawnPoint.Set(ball);
-                    balls.Add(ball);
+                    _ballController.Add(ball);
                 }
 
-            return balls;
+            return _ballController;
         }
 
         private BallColor GetRandomBallColor()

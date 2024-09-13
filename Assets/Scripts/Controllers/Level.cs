@@ -1,6 +1,5 @@
 ﻿using Scripts.Interfaces;
 using System;
-using UnityEngine;
 
 namespace Scripts.Controllers
 {
@@ -31,8 +30,6 @@ namespace Scripts.Controllers
 
         private void OnFinished(bool isWin)
         {
-            Debug.Log("Finished");
-
             if (isWin)
                 DisplayedWinningPanel?.Invoke();
 

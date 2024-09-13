@@ -5,33 +5,33 @@ namespace Scripts.Spawner
 {
     public class SpawnPoint : MonoBehaviour
     {
-        private IDestroyed _destroyed;
+        private IDestroyed _destroying;
 
-        public bool IsEmpty => _destroyed == null;
+        public bool IsEmpty => _destroying == null;
 
-        public void Set(IDestroyed spawning)
+        public void Set(IDestroyed destroying)
         {
-            _destroyed = spawning;
+            _destroying = destroying;
             SetPosition();
             Subscribe();
         }
 
         private void SetPosition()
         {
-            _destroyed.Transform.position = transform.position;
-            _destroyed.Transform.rotation = transform.rotation;
+            _destroying.Transform.position = transform.position;
+            _destroying.Transform.rotation = transform.rotation;
         }
 
         private void Subscribe()
-            => _destroyed.Destroyed += OnDestroyed;
+            => _destroying.Destroyed += OnDestroyed;
 
         private void Unsubscribe()
-            => _destroyed.Destroyed -= OnDestroyed;
+            => _destroying.Destroyed -= OnDestroyed;
 
         private void OnDestroyed()
         {
             Unsubscribe();
-            _destroyed = null;
+            _destroying = null;
         }
     }
 }

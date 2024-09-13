@@ -17,6 +17,8 @@ namespace Scripts.Players
         private GameInput _gameInput;
         private CharacterController _characterController;
         private bool _isEnabled;
+        private Vector3 _startPosition;
+        private Quaternion _startRotation;
 
         [Inject]
         private void Construct(GameInput gameInput)
@@ -29,7 +31,17 @@ namespace Scripts.Players
         }
 
         public void Initialize()
-            => _characterController = GetComponent<CharacterController>();
+        {
+            _characterController = GetComponent<CharacterController>();
+            _startPosition = transform.position;
+            _startRotation = transform.rotation;
+        }
+
+        public void ResetTransform()
+        {
+            transform.position = _startPosition;
+            transform.rotation = _startRotation;
+        }
 
         public void ReactBallBurster(Ball ball)
             => BurstedBall?.Invoke(ball);

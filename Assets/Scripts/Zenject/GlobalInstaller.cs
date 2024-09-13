@@ -1,4 +1,5 @@
 using Scripts.SceneLoaderImport.Loader;
+using Scripts.SceneLoaders;
 using Zenject;
 
 namespace Scripts.Zenject

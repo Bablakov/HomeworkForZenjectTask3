@@ -1,4 +1,6 @@
-namespace Scripts.SceneLoaderImport.Loader
+using Scripts.Enums;
+
+namespace Scripts.SceneLoaders
 {
     public class SceneLoadMediator
     {

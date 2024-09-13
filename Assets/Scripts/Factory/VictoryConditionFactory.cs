@@ -3,6 +3,7 @@ using Scripts.Interfaces;
 using Scripts.VictoryCondition;
 using Zenject;
 using System;
+using Scripts.Enums;
 
 namespace Scripts.Factory
 {

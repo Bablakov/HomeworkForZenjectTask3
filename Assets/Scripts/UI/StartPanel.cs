@@ -1,11 +1,8 @@
-using Scripts.Controllers;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class StartPanel : MonoBehaviour, IInitializable
+public class StartPanel : MonoBehaviour
 {
     public event Action StartAllBurstClicked;
     public event Action StartOneColorBurstClicked;
@@ -13,17 +10,29 @@ public class StartPanel : MonoBehaviour, IInitializable
     [SerializeField] private Button _buttonStartAllBurst;
     [SerializeField] private Button _buttonStartOneColor;
 
-    public void Initialize()
-    {
-        _buttonStartAllBurst.onClick.AddListener(OnStartedAllBurstClicked);
-        _buttonStartOneColor.onClick.AddListener(OnStartedOneColorBurstClicked);
-    }
+    private void OnEnable()
+        => Subscribe();
+
+    private void OnDisable()
+        => Unsubscribe();
 
     public void Enable()
         => gameObject.SetActive(true);
 
     public void Disable()
         => gameObject.SetActive(false);
+
+    private void Subscribe()
+    {
+        _buttonStartAllBurst.onClick.AddListener(OnStartedAllBurstClicked);
+        _buttonStartOneColor.onClick.AddListener(OnStartedOneColorBurstClicked);
+    }
+
+    private void Unsubscribe()
+    {
+        _buttonStartAllBurst.onClick.RemoveListener(OnStartedAllBurstClicked);
+        _buttonStartOneColor.onClick.RemoveListener(OnStartedOneColorBurstClicked);
+    }
 
     private void OnStartedAllBurstClicked()
         => StartAllBurstClicked?.Invoke();

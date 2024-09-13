@@ -1,6 +1,6 @@
-using Scripts.VictoryCondition;
+using Scripts.Enums;
 
-namespace Scripts.SceneLoaderImport.Loader
+namespace Scripts.SceneLoaders
 {
     public class LevelLoadingData
     {

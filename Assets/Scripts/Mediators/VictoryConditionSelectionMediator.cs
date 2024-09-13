@@ -1,9 +1,9 @@
-﻿using Scripts.SceneLoaderImport.Loader;
-using Scripts.VictoryCondition;
+﻿using Scripts.Enums;
+using Scripts.SceneLoaders;
+using Scripts.UI;
 using System;
-using UnityEngine;
 
-namespace Scripts.SceneLoaderImport
+namespace Scripts.Mediators
 {
     public class VictoryConditionSelectionMediator : IDisposable
     {
@@ -16,7 +16,6 @@ namespace Scripts.SceneLoaderImport
             _victoryConditionSelectionPanel = victoryConditionSelectionPanel;
             _sceneLoadMediator = sceneLoadMediator;
             Subscribe();
-            Debug.Log("CreateVictoryConditionSelectionMediator");
         }
 
         public void Dispose() => Unsubscribe();

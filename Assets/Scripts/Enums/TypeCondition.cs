@@ -1,4 +1,4 @@
-﻿namespace Scripts.VictoryCondition
+﻿namespace Scripts.Enums
 {
     public enum TypeCondition
     {

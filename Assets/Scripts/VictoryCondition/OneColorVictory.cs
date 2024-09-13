@@ -6,38 +6,25 @@ namespace Scripts.VictoryCondition
 {
     public class OneColorVictory : VictoryCondition
     {
-        private BallColor _ballTypeBurst = BallColor.None;
-        private bool _isCompleted;
+        private BallColor _ballTypeBurst;
 
         public OneColorVictory(BallsController ballsController, IBallBurster ballBurster)
             : base(ballsController, ballBurster)
-        { }
+            => _ballTypeBurst = BallColor.None;
 
         protected override void OnBurstedBall(Ball ball)
         {
-            if (_isCompleted == false)
-            {
-                if (_ballTypeBurst == BallColor.None)
-                {
-                    _ballTypeBurst = ball.BallColor;
-                }
-                else if (_ballTypeBurst != ball.BallColor)
-                {
-                    _isCompleted = true;
-                    FinishedInvoke(false);
-                }
+            if (_ballTypeBurst == BallColor.None)
+                _ballTypeBurst = ball.BallColor;
 
-                if (BallsController.Contains(ball))
-                {
-                    BallsController.Remove(ball);
-                }
+            else if (_ballTypeBurst != ball.BallColor)
+                FinishedInvoke(false);
 
-                if (BallsController.CountByColor(_ballTypeBurst) == 0)
-                {
-                    _isCompleted = true;
-                    FinishedInvoke(true);
-                }
-            }
+            if (BallsController.Contains(ball))
+                BallsController.Remove(ball);
+
+            if (BallsController.CountByColor(_ballTypeBurst) == 0)
+                FinishedInvoke(true);
         }
     }
 }

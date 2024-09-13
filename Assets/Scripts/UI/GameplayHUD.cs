@@ -1,9 +1,10 @@
 using Scripts.SceneLoaderImport.Loader;
+using Scripts.SceneLoaders;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Scripts.SceneLoaderImport
+namespace Scripts.UI
 {
     public class GameplayHUD : MonoBehaviour
     {
