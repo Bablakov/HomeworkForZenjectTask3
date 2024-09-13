@@ -14,14 +14,17 @@ namespace Scripts.VictoryCondition
 
         protected override void OnBurstedBall(Ball ball)
         {
+            if (BallsController.Contains(ball) == false)
+                return;
+
             if (_ballTypeBurst == BallColor.None)
                 _ballTypeBurst = ball.BallColor;
 
-            else if (_ballTypeBurst != ball.BallColor)
-                FinishedInvoke(false);
-
             if (BallsController.Contains(ball))
                 BallsController.Remove(ball);
+
+            if (_ballTypeBurst != ball.BallColor)
+                FinishedInvoke(false);
 
             if (BallsController.CountByColor(_ballTypeBurst) == 0)
                 FinishedInvoke(true);

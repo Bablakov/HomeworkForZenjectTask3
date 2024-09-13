@@ -3,38 +3,45 @@ using System;
 using Scripts.Balls;
 using Scripts.Interfaces;
 using UnityEngine;
+using Scripts.Configs;
 using Zenject;
 
 namespace Scripts.Players
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Player : MonoBehaviour, IBallBurster, IInitializable
+    public class Player : MonoBehaviour, IBallBurster, ISpawning
     {
         public event Action<Ball> BurstedBall;
 
-        [SerializeField, Range(0, 10)] private float _speed;
-
+        private PlayerSpecificationsConfig _playerSpecificationsConfig;
         private GameInput _gameInput;
         private CharacterController _characterController;
         private bool _isEnabled;
         private Vector3 _startPosition;
         private Quaternion _startRotation;
 
-        [Inject]
-        private void Construct(GameInput gameInput)
-            => _gameInput = gameInput;
+        private float Speed => _playerSpecificationsConfig.Speed;
 
         private void Update()
         {
             if (_isEnabled && _gameInput.CanMovement)
-                _characterController.Move(_gameInput.GetDirectionMovememt() * _speed * Time.deltaTime);
+                _characterController.Move(_gameInput.GetDirectionMovememt() * Speed * Time.deltaTime);
+        }
+
+        [Inject]
+        public void Construct(GameInput gameInput, PlayerSpecificationsConfig playerConfig)
+        {
+            _gameInput = gameInput;
+            _playerSpecificationsConfig = playerConfig;
         }
 
         public void Initialize()
+            => _characterController = GetComponent<CharacterController>();
+
+        public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
         {
-            _characterController = GetComponent<CharacterController>();
-            _startPosition = transform.position;
-            _startRotation = transform.rotation;
+            transform.position = _startPosition = position;
+            transform.rotation = _startRotation = rotation;
         }
 
         public void ResetTransform()

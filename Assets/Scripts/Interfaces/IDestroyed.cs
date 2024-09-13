@@ -1,12 +1,9 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Scripts.Interfaces
 {
-    public interface IDestroyed
+    public interface IDestroyed : ISpawning
     {
         public event Action Destroyed;
-
-        public Transform Transform { get; }
     }
 }

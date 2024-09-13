@@ -11,13 +11,13 @@ namespace Scripts.Spawner
     public class BallSpawner
     {
         private BallFactory _ballFactory;
-        private List<SpawnPoint> _spawnPoints;
+        private List<SpawnPointWithControllObject> _spawnPoints;
         private BallsController _ballController;
 
-        private BallSpawner(BallFactory ballFactory, IEnumerable<SpawnPoint> spawnPoints)
+        private BallSpawner(BallFactory ballFactory, IEnumerable<SpawnPointWithControllObject> spawnPoints)
         {
             _ballFactory = ballFactory;
-            _spawnPoints = new List<SpawnPoint>(spawnPoints);
+            _spawnPoints = new List<SpawnPointWithControllObject>(spawnPoints);
             _ballController = new BallsController(new List<Ball>());
         }
 

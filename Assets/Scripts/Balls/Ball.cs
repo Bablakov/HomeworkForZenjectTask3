@@ -9,8 +9,6 @@ namespace Scripts.Balls
     {
         public event Action Destroyed;
 
-        public Transform Transform => transform;
-
         [field: SerializeField] public BallColor BallColor { get; private set; }
 
         private void OnTriggerEnter(Collider other)
@@ -21,6 +19,12 @@ namespace Scripts.Balls
                 Destroyed?.Invoke();
                 Destroy(gameObject);
             }
+        }
+
+        public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+        {
+            transform.position = position;
+            transform.rotation = rotation;
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using Scripts.Players;
-using UnityEngine;
+﻿using Scripts.Configs;
+using Scripts.Players;
+using Scripts.Spawner;
 using Zenject;
 
 namespace Scripts.Factory
@@ -7,16 +8,20 @@ namespace Scripts.Factory
     public class PlayerFactory
     {
         private IInstantiator _instantiator;
+        private PlayerConfig _playerConfig;
 
-        public PlayerFactory(IInstantiator instantiator) =>
-            _instantiator = instantiator;
-
-        public Player Create(Vector3 position, Quaternion rotation)
+        public PlayerFactory(IInstantiator instantiator, PlayerConfig playerConfig)
         {
-            Player player = _instantiator.Instantiate<Player>();
+            _instantiator = instantiator;
+            _playerConfig = playerConfig;
+        }
 
-            player.transform.position = position;
-            player.transform.rotation = rotation;
+        public Player Create(SpawnPoint spawnPoint)  
+        {
+            Player player = _instantiator.InstantiatePrefab(_playerConfig.Player).GetComponent<Player>();
+
+            spawnPoint.Set(player);
+            player.Initialize();
 
             return player;
         }
