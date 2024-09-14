@@ -1,13 +1,9 @@
-﻿using Scripts.Interfaces;
-
-namespace Scripts.StateMachine.States.SceneState
+﻿namespace Scripts.StateMachine.States.SceneState
 {
     public abstract class SceneState : DefaultState
     {
-        protected readonly ISaverData Data;
-
-        public SceneState(SceneStateMachine stateMachine, ISaverData savaerData)
+        public SceneState(SceneStateMachine stateMachine)
             : base(stateMachine)
-            => Data = savaerData;
+        { }
     }
 }   

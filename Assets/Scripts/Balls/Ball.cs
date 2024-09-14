@@ -5,26 +5,22 @@ using UnityEngine;
 
 namespace Scripts.Balls
 {
-    public class Ball : MonoBehaviour, IDestroyed
+    public class Ball : MonoBehaviour, IDestroyedBall, IClicked
     {
-        public event Action Destroyed;
+        public event Action<Ball> Destroyed;
 
         [field: SerializeField] public BallColor BallColor { get; private set; }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out IBallBurster ballBurster))
-            {
-                ballBurster.ReactBallBurster(this);
-                Destroyed?.Invoke();
-                Destroy(gameObject);
-            }
-        }
 
         public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
         {
             transform.position = position;
             transform.rotation = rotation;
+        }
+
+        public void ClickInteract()
+        {
+            Destroyed?.Invoke(this);
+            Destroy(gameObject);
         }
     }
 }

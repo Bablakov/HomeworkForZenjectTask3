@@ -4,23 +4,29 @@ using System;
 
 namespace Scripts.VictoryCondition
 {
-    public abstract class VictoryCondition : IVictoryCondition
+    public abstract class VictoryCondition : IVictoryCondition, IDisposable
     {
         public event Action<bool> Finished;
 
         protected BallsController BallsController;
-        protected IBallBurster BallBurster;
 
-        public VictoryCondition(BallsController ballsController, IBallBurster ballBurster)
+        public VictoryCondition(BallsController ballsController)
         {
             BallsController = ballsController;
-            BallBurster = ballBurster;
-            BallBurster.BurstedBall += OnBurstedBall;
+            Subscribe();
         }
+
+        public void Dispose() => Unsubscribe();
 
         protected void FinishedInvoke(bool isFinished)
             => Finished?.Invoke(isFinished);
 
-        protected abstract void OnBurstedBall(Ball ball);
+        protected abstract void OnDestroyedBall(Ball ball);
+
+        private void Subscribe() 
+            => BallsController.BallDestroyed += OnDestroyedBall;
+
+        private void Unsubscribe()
+            => BallsController.BallDestroyed -= OnDestroyedBall;
     }
 }

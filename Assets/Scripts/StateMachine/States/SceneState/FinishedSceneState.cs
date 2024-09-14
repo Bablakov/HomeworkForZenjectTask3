@@ -1,4 +1,4 @@
-﻿using Scripts.Interfaces;
+﻿using Scripts.Input;
 using Scripts.Zenject.Signals;
 using Zenject;
 
@@ -7,14 +7,20 @@ namespace Scripts.StateMachine.States.SceneState
     public class FinishedSceneState : SceneState
     {
         private SignalBus _signalBus;
+        private GameInput _gameInput;
 
-        public FinishedSceneState(SceneStateMachine stateMachine, ISaverData saverData, SignalBus signalBus) 
-            : base(stateMachine, saverData)
-            => _signalBus = signalBus;
+        public FinishedSceneState(SceneStateMachine stateMachine, SignalBus signalBus, GameInput gameInput) 
+            : base(stateMachine)
+        {
+            _signalBus = signalBus;
+            _gameInput = gameInput;
+        }
     
         public override void Enter()
         {
             base.Enter();
+
+            _gameInput.Disable();
 
             Subscribe();
         }
@@ -31,6 +37,6 @@ namespace Scripts.StateMachine.States.SceneState
         private void Unsubscribe() => _signalBus.Unsubscribe<RestartedGameSignal>(OnFinishedGameSignal);
 
         private void OnFinishedGameSignal(RestartedGameSignal signal)
-            => StateMachine.SwitchState<RestartSceneState>();
+            => StateMachine.SwitchState<BootstrapSceneState>();
     }
 }

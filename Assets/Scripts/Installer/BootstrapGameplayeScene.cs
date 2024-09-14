@@ -23,7 +23,6 @@ namespace Scripts.Installer
             _gameStateMachine.RegisterState(_statesFactory.Create<BootstrapSceneState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<FinishedSceneState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<GameplaySceneState>());
-            _gameStateMachine.RegisterState(_statesFactory.Create<RestartSceneState>());
 
             _gameStateMachine.SwitchState<BootstrapSceneState>();
         }

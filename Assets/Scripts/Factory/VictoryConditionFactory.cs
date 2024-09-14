@@ -1,30 +1,21 @@
-﻿using Scripts.Balls;
-using Scripts.Interfaces;
-using Scripts.VictoryCondition;
-using Zenject;
+﻿using Scripts.VictoryCondition;
 using System;
 using Scripts.Enums;
-using UnityEngine;
+using Scripts.Balls;
 
 namespace Scripts.Factory
 {
     public class VictoryConditionFactory
     {
-        private IInstantiator _instantiator;
-
-        public VictoryConditionFactory(IInstantiator instantiator) =>
-            _instantiator = instantiator;
-
-        public VictoryCondition.VictoryCondition Create(TypeCondition type, BallsController ballsController, IBallBurster ballBurster)
+        public VictoryCondition.VictoryCondition Create(TypeCondition type, BallsController ballsController)
         {
-            Debug.Log("-----------------------------------");
             switch(type)
             {
                 case TypeCondition.AllColor:
-                    return new AllColorVictory(ballsController, ballBurster);
+                    return new AllColorVictory(ballsController);
 
                 case TypeCondition.OneColor:
-                    return new OneColorVictory(ballsController, ballBurster);
+                    return new OneColorVictory(ballsController);
 
                 default:
                     throw new ArgumentException(nameof(type));

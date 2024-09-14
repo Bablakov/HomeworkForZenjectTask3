@@ -1,19 +1,16 @@
 using Scripts.Balls;
-using Scripts.Interfaces;
+using Zenject;
 
 namespace Scripts.VictoryCondition
 {
     public class AllColorVictory : VictoryCondition
     {
-        public AllColorVictory(BallsController ballsController, IBallBurster ballBurster)
-            : base(ballsController, ballBurster)
+        public AllColorVictory(BallsController ballsController)
+            : base(ballsController)
         { }
 
-        protected override void OnBurstedBall(Ball ball)
+        protected override void OnDestroyedBall(Ball ball)
         {
-            if (BallsController.Contains(ball))
-                BallsController.Remove(ball);
-
             if (BallsController.Count == 0)
                 FinishedInvoke(true);
         }

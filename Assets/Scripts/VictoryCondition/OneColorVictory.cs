@@ -1,7 +1,5 @@
 ﻿using Scripts.Balls;
-using Scripts.Interfaces;
 using Scripts.Enums;
-using UnityEngine;
 
 namespace Scripts.VictoryCondition
 {
@@ -9,21 +7,14 @@ namespace Scripts.VictoryCondition
     {
         private BallColor _ballTypeBurst;
 
-        public OneColorVictory(BallsController ballsController, IBallBurster ballBurster)
-            : base(ballsController, ballBurster)
+        public OneColorVictory(BallsController ballsController)
+            : base(ballsController)
             => _ballTypeBurst = BallColor.None;
 
-        protected override void OnBurstedBall(Ball ball)
+        protected override void OnDestroyedBall(Ball ball)
         {
-            Debug.Log($"{_ballTypeBurst}, {ball.BallColor}");
-            if (BallsController.Contains(ball) == false)
-                return;
-
             if (_ballTypeBurst == BallColor.None)
                 _ballTypeBurst = ball.BallColor;
-
-            if (BallsController.Contains(ball))
-                BallsController.Remove(ball);
 
             if (_ballTypeBurst != ball.BallColor)
                 FinishedInvoke(false);

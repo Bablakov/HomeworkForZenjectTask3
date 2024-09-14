@@ -1,5 +1,4 @@
-﻿using Scripts.Interfaces;
-using Scripts.Players;
+﻿using Scripts.Input;
 using Scripts.UI;
 using Scripts.Zenject.Signals;
 using Zenject;
@@ -11,17 +10,22 @@ namespace Scripts.StateMachine.States.SceneState
         private WinningPanel _winningPanel;
         private DefeatPanel _defeatPanel;
         private SignalBus _signalBus;
+        private GameInput _gameInput;
 
-        public GameplaySceneState(SceneStateMachine stateMachine, ISaverData saverData, 
+        public GameplaySceneState(SceneStateMachine stateMachine, GameInput gameInput,
             WinningPanel winningPanel, DefeatPanel defeatPanel, SignalBus signalBus)
-            : base(stateMachine, saverData)
-            => _signalBus = signalBus;
+            : base(stateMachine)
+        {
+            _signalBus = signalBus;
+            _gameInput = gameInput;
+        }
 
         public override void Enter()
         {
             base.Enter();
 
-            Data.Player.Enable();
+            _gameInput.Enable();
+            
             Subscribe();
         }
 
@@ -29,7 +33,6 @@ namespace Scripts.StateMachine.States.SceneState
         {
             base.Exit();
 
-            Data.Player.Disable();
             Unsubscribe();
         }
 

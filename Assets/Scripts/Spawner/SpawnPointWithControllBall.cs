@@ -1,14 +1,15 @@
-﻿using Scripts.Interfaces;
+﻿using Scripts.Balls;
+using Scripts.Interfaces;
 
 namespace Scripts.Spawner
 {
-    public class SpawnPointWithControllObject : SpawnPoint
+    public class SpawnPointWithControllBall : SpawnPoint
     {
-        private IDestroyed _destroying;
+        private IDestroyedBall _destroying;
 
         public bool IsEmpty => _destroying == null;
 
-        public void Set(IDestroyed destroying)
+        public void Set(IDestroyedBall destroying)
         {
             _destroying = destroying;
             Set((ISpawning)destroying);
@@ -21,7 +22,7 @@ namespace Scripts.Spawner
         private void Unsubscribe()
             => _destroying.Destroyed -= OnDestroyed;
 
-        private void OnDestroyed()
+        private void OnDestroyed(Ball ball)
         {
             Unsubscribe();
             _destroying = null;
