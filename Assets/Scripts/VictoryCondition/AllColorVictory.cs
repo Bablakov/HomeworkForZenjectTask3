@@ -1,5 +1,4 @@
 using Scripts.Balls;
-using Zenject;
 
 namespace Scripts.VictoryCondition
 {

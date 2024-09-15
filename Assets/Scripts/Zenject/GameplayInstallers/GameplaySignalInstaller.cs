@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Zenject.Signals;
-using Scripts.Zenject.Signals;
+﻿using Scripts.Zenject.Signals;
 using Zenject;
 
 namespace Scripts.Zenject.GameplayInstallers
@@ -17,9 +16,14 @@ namespace Scripts.Zenject.GameplayInstallers
 
         private void BindSignals()
         {
-            Container.DeclareSignal<FinishedGameSignal>().OptionalSubscriber();
-            Container.DeclareSignal<RestartedGameSignal>().OptionalSubscriber();
-            Container.DeclareSignal<ClickedOnBallSignal>().OptionalSubscriber();
+            BindFinishedGameSignal();
+            BindRestartedGameSignal();
         }
+
+        private void BindFinishedGameSignal() 
+            => Container.DeclareSignal<FinishedGameSignal>().OptionalSubscriber();
+
+        private void BindRestartedGameSignal() 
+            => Container.DeclareSignal<RestartedGameSignal>().OptionalSubscriber();
     }
 }

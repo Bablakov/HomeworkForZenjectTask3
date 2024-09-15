@@ -25,7 +25,6 @@ namespace Scripts.StateMachine.States.SceneState
             base.Enter();
 
             _gameInput.Enable();
-            
             Subscribe();
         }
 

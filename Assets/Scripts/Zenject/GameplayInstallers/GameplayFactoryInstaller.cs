@@ -11,10 +11,22 @@ namespace Scripts.Zenject.GameplayInstallers
 
         public override void InstallBindings()
         {
-            Container.Bind<StatesFactory>().AsSingle();
-            Container.BindInterfacesAndSelfTo<VictoryConditionFactory>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BallFactory>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BallConfiguration>().FromInstance(_ballConfiguration);
+            BindStatesFactory();
+            BindVictoryConditionFactory();
+            BindBallFactory();
+            BindBallConfiguration();
         }
+
+        private void BindStatesFactory() 
+            => Container.Bind<StatesFactory>().AsSingle();
+
+        private void BindVictoryConditionFactory() 
+            => Container.BindInterfacesAndSelfTo<VictoryConditionFactory>().AsSingle();
+
+        private void BindBallFactory() 
+            => Container.BindInterfacesAndSelfTo<BallFactory>().AsSingle();
+
+        private void BindBallConfiguration() 
+            => Container.BindInterfacesAndSelfTo<BallConfiguration>().FromInstance(_ballConfiguration);
     }
 }

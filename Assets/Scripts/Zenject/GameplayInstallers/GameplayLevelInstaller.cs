@@ -8,8 +8,14 @@ namespace Scripts.Zenject.GameplayInstallers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<Level>().AsSingle();
-            Container.BindInterfacesAndSelfTo<LevelMediator>().AsSingle();
+            BindLevel();
+            BindLevelMediator();
         }
+
+        private void BindLevel() 
+            => Container.BindInterfacesAndSelfTo<Level>().AsSingle();
+
+        private void BindLevelMediator() 
+            => Container.BindInterfacesAndSelfTo<LevelMediator>().AsSingle();
     }
 }

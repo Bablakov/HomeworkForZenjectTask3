@@ -11,8 +11,14 @@ namespace Assets.Scripts.Zenject
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<VictoryConditionSelectionPanel>().FromInstance(_victoryConditionSelectionPanel);
-            Container.BindInterfacesAndSelfTo<VictoryConditionSelectionMediator>().AsSingle();
+            BindVictoryConditionSelectionPanel();
+            BindVictoryConditionSelectionMediator();
         }
+
+        private void BindVictoryConditionSelectionPanel() 
+            => Container.BindInterfacesAndSelfTo<VictoryConditionSelectionPanel>().FromInstance(_victoryConditionSelectionPanel);
+
+        private void BindVictoryConditionSelectionMediator() 
+            => Container.BindInterfacesAndSelfTo<VictoryConditionSelectionMediator>().AsSingle();
     }
 }

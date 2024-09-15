@@ -32,7 +32,7 @@ namespace Scripts.StateMachine.States.SceneState
                 _level.SetVictoryCondition(_victoryConditionFactory.Create(_levelLoadingData.Level, ballsController));
 
             else
-                throw new ArgumentException("Не могу запустить проект");
+                throw new Exception("Не могу запустить проект, не хватает компонентов");
 
             StateMachine.SwitchState<GameplaySceneState>();
         }
