@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797b1b12d0f325a46b7795fba3e35078, type: 3}
-  m_Name: UIConfig
+  m_Name: UIGameplayConfig
   m_EditorClassIdentifier: 
   <WinningPanel>k__BackingField: {fileID: 6180626093344126383, guid: df963f891cf1cf943b16143befb3a11e,
     type: 3}

@@ -7,7 +7,7 @@ namespace Scripts.Zenject.GameplayInstallers
 {
     public class GameplayUIInstaller : MonoInstaller
     {
-        [SerializeField] private UIConfig _uiConfig;
+        [SerializeField] private UIGameplayConfig _uiConfig;
         [SerializeField] private Transform _transformParentUIPanels;
 
         public override void InstallBindings()

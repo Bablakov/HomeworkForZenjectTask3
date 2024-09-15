@@ -1,10 +1,11 @@
 using System;
+using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts.UI
 {
-    public class VictoryConditionSelectionPanel : MonoBehaviour
+    public class VictoryConditionSelectionPanel : MonoBehaviour, IInitializable, IDisposable
     {
         public event Action AllColorVictorySelected;
         public event Action OneColorVictorySelected;
@@ -12,9 +13,11 @@ namespace Scripts.UI
         [SerializeField] private Button _allColorVictorySelecteButton;
         [SerializeField] private Button _oneColorVictorySelecteButton;
 
-        private void OnEnable() => Subscribe();
+        public void Initialize()
+            => Subscribe();
 
-        private void OnDisable() => Unsubscribe();
+        public void Dispose()
+            => Unsubscribe();
 
         private void Subscribe()
         {

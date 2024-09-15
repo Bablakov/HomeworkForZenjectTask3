@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 577637863000276814}
   - component: {fileID: 941038344270989639}
   m_Layer: 5
-  m_Name: FinishedPanelForGamplayScene
+  m_Name: DefaultPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

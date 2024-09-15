@@ -1,10 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Scripts.UI
 {
-    public abstract class FinishedPanel : MonoBehaviour
+    public abstract class FinishedPanel : MonoBehaviour, IInitializable, IDisposable
     {
         public event Action RestarteClicked;
         public event Action ExitMainMenuClicked;
@@ -12,10 +13,10 @@ namespace Scripts.UI
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _exitMainMenuButton;
 
-        private void OnEnable()
+        public void Initialize()
             => Subscribe();
 
-        private void OnDisable()
+        public void Dispose()
             => Unsubscribe();
 
         public void Enable()
